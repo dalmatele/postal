@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  mariadb:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: postal
+      MARIADB_DATABASE: postal
+    networks:
+      - shared
+# docker network create shared-net
+networks:
+  shared:
+    external: true
+    name: shared-net
