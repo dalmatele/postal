@@ -4,6 +4,7 @@ postal:
   web_hostname: mailvietel.gh2vs.com
   web_protocol: http
   smtp_hostname: mailvietel.gh2vs.com
+  use_ip_pools: true
 web_server:
   default_port: 8080
   default_bind_address: 0.0.0.0
@@ -14,16 +15,18 @@ logging:
   highlighting_enabled: true
 
 main_db:
-  host: mariadb
+  host: 42.112.28.219
   username: root
   password: postal
   database: postal
+  port: 33050
 
 message_db:
-  host: mariadb
+  host: 42.112.28.219
   username: root
   password: postal
   prefix: postal
+  port: 33050
 
 smtp_server:
   default_bind_address: "::"
