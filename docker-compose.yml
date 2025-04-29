@@ -1,29 +1,17 @@
 version: "3"
 services:
-  postal-smtp:
-    build:
-      context: .
-    image: viettel-smtp
-    entrypoint: ["/docker-entrypoint.sh"]
-    volumes:
-      - "./docker/ci-config:/config"
-    command: postal smtp-server # web-server smtp-server   
-    ports:
-      - 25:25
-    environment:
-      RAILS_ENVIRONMENT: test
-  postal-smtp-1:
-    build:
-      context: .
-    image: viettel-smtp
-    entrypoint: ["/docker-entrypoint.sh"]
-    volumes:
-      - "./docker/ci-config:/config"
-    command: postal smtp-server # web-server smtp-server   
-    ports:
-      - 2525:25
-    environment:
-      RAILS_ENVIRONMENT: test
+  # postal-smtp:
+  #   build:
+  #     context: .
+  #   image: viettel-smtp
+  #   entrypoint: ["/docker-entrypoint.sh"]
+  #   volumes:
+  #     - "./docker/ci-config:/config"
+  #   command: postal smtp-server # web-server smtp-server   
+  #   ports:
+  #     - 25:25
+  #   environment:
+  #     RAILS_ENVIRONMENT: test
   postal-worker:
     build:
       context: .
@@ -36,22 +24,22 @@ services:
       - 9090:9090
     environment:
       RAILS_ENVIRONMENT: test
-  postal:
-    build:
-      context: .
-    image: viettel-postal
-    entrypoint: ["/docker-entrypoint.sh"]
-    volumes:
-      - "./docker/ci-config:/config"
-    command: postal web-server # web-server smtp-server   
-    ports:
-      - 8080:8080
-    # networks:
-    #   - shared
-    environment:
-      # WAIT_FOR_TARGETS: |-
-      #   mariadb:3306
-      RAILS_ENVIRONMENT: test
+  # postal:
+  #   build:
+  #     context: .
+  #   image: viettel-postal
+  #   entrypoint: ["/docker-entrypoint.sh"]
+  #   volumes:
+  #     - "./docker/ci-config:/config"
+  #   command: postal web-server # web-server smtp-server   
+  #   ports:
+  #     - 8080:8080
+  #   # networks:
+  #   #   - shared
+  #   environment:
+  #     # WAIT_FOR_TARGETS: |-
+  #     #   mariadb:3306
+  #     RAILS_ENVIRONMENT: test
 # networks:
 #   shared:
 #     external: true

@@ -33,4 +33,5 @@ BRANCH
 
 .rubocop-https*
 .env*
+docker/ci-config/postal.yml
 
