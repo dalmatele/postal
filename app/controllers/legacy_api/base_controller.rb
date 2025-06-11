@@ -72,27 +72,40 @@ module LegacyAPI
     # @return [void]
     def authenticate_as_server
       key = request.headers["X-Server-API-Key"]
-      if key.blank?
-        render_error "AccessDenied",
-                     message: "Must be authenticated as a server."
-        return
-      end
+      server_key = request.headers["X-Server-Key"]
+      if server_key.blank?
+        if key.blank?
+          render_error "AccessDenied",
+                       message: "Must be authenticated as a server."
+          return
+        end
 
-      credential = Credential.where(type: "API", key: key).first
-      if credential.nil?
-        render_error "InvalidServerAPIKey",
-                     message: "The API token provided in X-Server-API-Key was not valid.",
-                     token: key
-        return
-      end
+        credential = Credential.where(type: "API", key: key).first
+        if credential.nil?
+          render_error "InvalidServerAPIKey",
+                       message: "The API token provided in X-Server-API-Key was not valid.",
+                       token: key
+          return
+        end
 
-      if credential.server.suspended?
-        render_error "ServerSuspended"
-        return
-      end
+        if credential.server.suspended?
+          render_error "ServerSuspended"
+          return
+        end
 
-      credential.use
-      @current_credential = credential
+        credential.use
+        @current_credential = credential
+      else
+        # is this a server's request
+        config_key = Postal::Config.postal.server_key
+        if server_key == config_key
+          @current_server_key = server_key
+        else
+          render_error "AccessDenied",
+                       message: "Must be authenticated as a server"
+          return
+        end
+      end
     end
 
     # Render a successful response to the client

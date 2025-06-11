@@ -19,9 +19,9 @@ services:
     entrypoint: ["/docker-entrypoint.sh"]
     volumes:
       - "./docker/ci-config:/config"
-    command: postal worker # web-server smtp-server   
+    command: postal web-server # web-server smtp-server worker
     ports:
-      - 9090:9090
+      - 9090:8080
     environment:
       RAILS_ENVIRONMENT: test
   # postal:
