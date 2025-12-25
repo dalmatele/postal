@@ -18,6 +18,8 @@ module Postal
         delivery = Delivery.new(message, attributes.merge("id" => id))
         delivery.update_statistics
         delivery.send_webhooks
+        # ducla: Sent data to Kafka
+        delivery.kafka_event
         delivery
       end
 
@@ -78,7 +80,9 @@ module Postal
                            end
       end
       # rubocop:enable Style/HashLikeCase
-
+      def kafka_event
+        KafkaPublisherService.publish("mail-webhook", webhook_hash)
+      end
     end
   end
 end
