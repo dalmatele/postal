@@ -18,6 +18,7 @@ RUN apt-get update && \
     nano \
     libyaml-dev \
     nodejs \
+    librdkafka-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
