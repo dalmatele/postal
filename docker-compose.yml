@@ -44,6 +44,6 @@ services:
       # WAIT_FOR_TARGETS: |-
       #   mariadb:3306
       RAILS_ENVIRONMENT: test
-#networks:
-#  mail_network:
-#    external: true
+networks:
+  mail_network:
+    external: true
