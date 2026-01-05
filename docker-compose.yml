@@ -12,8 +12,8 @@ services:
       - 25:25
     environment:
       RAILS_ENVIRONMENT: test
-#    networks:
-#      - mail_network
+    networks:
+      - mail_network
   postal-worker:
     build:
       context: .
@@ -26,8 +26,8 @@ services:
       - 9090:9090
     environment:
       RAILS_ENVIRONMENT: test
-#    networks:
-#      - mail_network
+    networks:
+      - mail_network
   postal:
     build:
       context: .
@@ -38,8 +38,8 @@ services:
     command: postal web-server # web-server smtp-server   
     ports:
       - 8080:8080
-#    networks:
-#      - mail_network
+    networks:
+      - mail_network
     environment:
       # WAIT_FOR_TARGETS: |-
       #   mariadb:3306
