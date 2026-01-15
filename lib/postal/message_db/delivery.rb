@@ -82,7 +82,7 @@ module Postal
       # rubocop:enable Style/HashLikeCase
       def kafka_event
         # logger.info "Hello world"
-        # KafkaPublisherService.publish("mail-webhook", webhook_hash)
+        KafkaPublisherService.publish("mail-webhook", webhook_hash)
       end
     end
   end

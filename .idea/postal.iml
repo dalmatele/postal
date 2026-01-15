@@ -347,9 +347,6 @@
     <entry key="config">
       <value>file://$MODULE_DIR$/config</value>
     </entry>
-    <entry key="config/cable">
-      <value>file://$MODULE_DIR$/config/cable.yml</value>
-    </entry>
     <entry key="config/database">
       <value>file://$MODULE_DIR$/config/database.yml</value>
     </entry>
@@ -396,7 +393,7 @@
       <value>file://$MODULE_DIR$/lib/templates</value>
     </entry>
     <entry key="log">
-      <value>file://$MODULE_DIR$/log/development.log</value>
+      <value>file://$MODULE_DIR$/log/test.log</value>
     </entry>
     <entry key="public">
       <value>file://$MODULE_DIR$/public</value>
@@ -406,6 +403,10 @@
     </entry>
     <entry key="public/stylesheets">
       <value>file://$MODULE_DIR$/public/stylesheets</value>
+    </entry>
+    <entry key="test/mailers/previews">
+      <value>file://$MODULE_DIR$/test/mailers/previews</value>
+      <value>file://$MODULE_DIR$/test/mailers/previews</value>
     </entry>
     <entry key="tmp">
       <value>file://$MODULE_DIR$/tmp</value>

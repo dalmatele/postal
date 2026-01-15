@@ -1,13 +1,19 @@
 require "rdkafka"
 
 kafka_config = {
-  "bootstrap.servers": "42.112.28.219:9092",
-  "client.id": "rails-app-producer",
-  # "security.protocol": "sasl_plaintext",#"sasl_ssl",
-  # "sasl.mechanism": "PLAIN",#"SCRAM-SHA-256",
-  # "sasl.username": "username",
-  # "sasl.password": "password"
-}
-
-KAFKA_PRODUCER = Rdkafka::Config.new(kafka_config).producer
-at_exit {KAFKA_PRODUCER.close}
+  "bootstrap.servers" => ENV.fetch("KAFKA_BROKERS"),
+  "client.id" => ENV.fetch("KAFKA_CLIENT_ID"),
+  # "security.protocol" => ENV.fetch("KAFKA_PROTOCOL),
+  # "sasl.mechanisms": "PLAIN",#"SCRAM-SHA-256",
+  # "sasl.username" =>  ENV.fetch("KAFKA_USERNAME"),
+  # "sasl.password" => ENV.fetch("KAFKA_PASSWORD"),
+  "acks" => "all",
+  "enable.idempotence" => "true"
+  }
+begin
+  KAFKA_PRODUCER = Rdkafka::Config.new(kafka_config).producer
+  puts "Kafka connected!!!"
+rescue StandardError => e
+  puts "Kafka connects error: #{e.message}"
+end
+at_exit {KAFKA_PRODUCER.close if defined? (KAFKA_PRODUCER)}
