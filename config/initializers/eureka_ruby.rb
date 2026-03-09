@@ -72,25 +72,25 @@ EurekaRuby.configure do |config|
 end
 
 # Khởi động Eureka client khi Rails server chạy
-if defined?(Rails::Server) && Rails.env.production? || Rails.env.development? || Rails.env.test?
+# if defined?(Rails::Server) && Rails.env.production? || Rails.env.development? || Rails.env.test?
   # Đăng ký instance với Eureka
-  begin
-    EurekaRuby.executor.run(:register)
-    puts "✅ Đã đăng ký thành công với Eureka Server!"
-  rescue => e
-    puts "❌ Lỗi đăng ký Eureka: #{e.message}"
-  end
+begin
+  EurekaRuby.executor.run(:register)
+  puts "✅ Đã đăng ký thành công với Eureka Server!"
+rescue => e
+  puts "❌ Lỗi đăng ký Eureka: #{e.message}"
+end
 
-  # Thread gửi heartbeat
-  Thread.new do
-    loop do
-      begin
-        EurekaRuby.executor.run(:send_heartbeat)
-        Rails.logger.debug "❤️ Đã gửi heartbeat tới Eureka"
-      rescue => e
-        Rails.logger.error "Lỗi gửi heartbeat: #{e.message}"
-      end
-      sleep ENV.fetch('EUREKA_HEARTBEAT_INTERVAL', 30).to_i
+# Thread gửi heartbeat
+Thread.new do
+  loop do
+    begin
+      EurekaRuby.executor.run(:send_heartbeat)
+      Rails.logger.debug "❤️ Đã gửi heartbeat tới Eureka"
+    rescue => e
+      Rails.logger.error "Lỗi gửi heartbeat: #{e.message}"
     end
+    sleep ENV.fetch('EUREKA_HEARTBEAT_INTERVAL', 30).to_i
   end
 end
+# end
