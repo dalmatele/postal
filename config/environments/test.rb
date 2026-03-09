@@ -42,5 +42,5 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   # config to run with other host
-  config.hosts = "mailviettel.gh2vs.com:8080"
+  # config.hosts = "mailviettel.gh2vs.com:8080"
 end
