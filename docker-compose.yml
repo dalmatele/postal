@@ -3,7 +3,7 @@ services:
 #  postal-smtp:
 #    build:
 #      context: .
-#    image: viettel-smtp
+#    image: postal-smtp
 #    entrypoint: ["/docker-entrypoint.sh"]
 #    volumes:
 #      - "./docker/ci-config:/config"
@@ -17,7 +17,7 @@ services:
   postal-worker:
     build:
       context: .
-    image: viettel-worker
+    image: postal-worker
     entrypoint: ["/docker-entrypoint.sh"]
     volumes:
       - "./docker/ci-config:/config"
@@ -31,7 +31,7 @@ services:
   postal:
     build:
       context: .
-    image: viettel-postal
+    image: postal-web
     entrypoint: ["/docker-entrypoint.sh"]
     volumes:
       - "./docker/ci-config:/config"
