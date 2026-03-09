@@ -36,6 +36,7 @@ gem "sentry-rails"
 gem "turbolinks", "~> 5"
 gem "webrick"
 gem "rdkafka"
+gem "eureka_ruby"
 
 group :oidc do
   # These are gems which are needed for OpenID connect. They are only required by the application
