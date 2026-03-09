@@ -99,5 +99,8 @@ Rails.application.routes.draw do
 
   get "ip" => "sessions#ip"
 
+  #Health check for eureka
+  get "/health", to: proc { [200, {'Content-Type' => 'text/plain'}, ["OK"]]}
+
   root "organizations#index"
 end
