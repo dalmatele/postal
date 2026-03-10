@@ -19,7 +19,10 @@ module Postal
         delivery.update_statistics
         delivery.send_webhooks
         # ducla: Sent data to Kafka
-        delivery.kafka_event
+        kafka_enable = ENV.fetch("kafka_enable")
+        if kafka_enable
+          delivery.kafka_event
+        end
         delivery
       end
 

@@ -10,10 +10,13 @@ kafka_config = {
   "acks" => "all",
   "enable.idempotence" => "true"
   }
-begin
-  KAFKA_PRODUCER = Rdkafka::Config.new(kafka_config).producer
-  puts "Kafka connected!!!"
-rescue StandardError => e
-  puts "Kafka connects error: #{e.message}"
+kafka_enable = ENV.fetch("KAFKA_ENABLED")
+if kafka_enable
+  begin
+    KAFKA_PRODUCER = Rdkafka::Config.new(kafka_config).producer
+    puts "Kafka connected!!!"
+  rescue StandardError => e
+    puts "Kafka connects error: #{e.message}"
+  end
 end
 at_exit {KAFKA_PRODUCER.close if defined? (KAFKA_PRODUCER)}
