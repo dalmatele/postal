@@ -10,7 +10,7 @@ kafka_config = {
   "acks" => "all",
   "enable.idempotence" => "true"
   }
-kafka_enable = ENV.fetch("KAFKA_ENABLED")
+kafka_enable = ENV.fetch("KAFKA_ENABLED") || false
 if kafka_enable
   begin
     KAFKA_PRODUCER = Rdkafka::Config.new(kafka_config).producer
