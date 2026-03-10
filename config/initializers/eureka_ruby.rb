@@ -71,7 +71,7 @@ EurekaRuby.configure do |config|
   puts "Eureka URL: #{config.eureka_url}"
   puts "==================================="
 end
-eureka_enabled  = ENV['EUREKA_ENABLED'] || false
+eureka_enabled  = ENV.fetch('EUREKA_ENABLED', false)
 # Khởi động Eureka client khi Rails server chạy
 if defined?(Rails::Server) && (Rails.env.production? || Rails.env.development? || Rails.env.test?) && eureka_enabled
   # Đăng ký instance với Eureka
