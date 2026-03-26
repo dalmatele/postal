@@ -28,11 +28,7 @@ EurekaRuby.configure do |config|
   local_ip = get_local_ip
 
   # --- Lấy port tự động ---
-  server_port = ENV.fetch('PORT', 3000).to_i
-  if defined?(Rails::Server) && Rails::Server.respond_to?(:options)
-    options = Rails::Server.options
-    server_port = options[:Port] || server_port
-  end
+  server_port = Postal::Config.web_server.default_port.to_i
 
   # Lấy tên host
   host_name = ENV.fetch('HOSTNAME', local_ip)
@@ -72,9 +68,7 @@ EurekaRuby.configure do |config|
   puts "Eureka URL: #{config.eureka_url}"
   puts "==================================="
 end
-puts Postal::Config.eureka.url
-# puts Postal::Config.rails
-if defined?(Rails::Server) && (Rails.env.production? || Rails.env.development? || Rails.env.test?) && Postal::Config.eureka.enabled
+if (Rails.env.production? || Rails.env.development? || Rails.env.test?) && Postal::Config.eureka.enabled
   # Đăng ký instance với Eureka
   begin
     EurekaRuby.executor.run(:register)
