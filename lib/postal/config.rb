@@ -70,7 +70,7 @@ module Postal
         warn "No configuration file found at #{config_file_path}"
         warn "Only using environment variables for configuration"
       end
-
+      # puts sources
       # Build configuration with the provided sources.
       Konfig::Config.build(ConfigSchema, sources: sources)
     end

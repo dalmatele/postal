@@ -589,6 +589,38 @@ module Postal
         description "The JWKS endpoint on the authorization server (only used when discovery is false)"
       end
     end
+    group :kafka do
+      string :bootstrap do
+        description "Address of Kafka"
+      end
+      string :client_id do
+        description "Postal client id in Kafka"
+      end
+      string :username do
+        description "Kafka username"
+      end
+      string :password do
+        description "Kafka password"
+      end
+      string :protocol do
+        description "Kafka protocol"
+      end
+      string :mechanism do
+        description "Kafka mechanism"
+      end
+      boolean :enabled do
+        description "Kafka enabled?"
+      end
+    end
+    group :eureka do
+      string :url do
+        description "Eureka url"
+        default "hello world"
+      end
+      boolean :enabled do
+        description "Eureka enabled?"
+      end
+    end
   end
 
   class << self

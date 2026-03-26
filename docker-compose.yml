@@ -14,16 +14,18 @@ services:
 #      RAILS_ENVIRONMENT: test
 #    networks:
 #      - mail_network
-  postal-worker:
-    build:
-      context: .
-    image: postal-worker
-    entrypoint: ["/docker-entrypoint.sh"]
-    volumes:
-      - "./docker/ci-config:/config"
-    command: postal worker # web-server smtp-server
-    ports:
-      - 9090:9090
+#  postal-worker:
+#    build:
+#      context: .
+#    image: postal-worker
+#    entrypoint: ["/docker-entrypoint.sh"]
+#    volumes:
+#      - "./docker/ci-config:/config"
+#    command: postal worker # web-server smtp-server
+#    ports:
+#      - 9090:9090
+#    env_file:
+#      - .env
 #    environment:
 #      RAILS_ENVIRONMENT: test
 #    networks:
@@ -34,12 +36,14 @@ services:
     image: postal-web
     entrypoint: ["/docker-entrypoint.sh"]
     volumes:
-      - "./docker/ci-config:/config"
+#      - "./docker/ci-config:/config"
+      - "./config/postal:/config"
     env_file:
       - .env
     command: postal web-server # web-server smtp-server   
     ports:
       - 8080:5000
+
 #    networks:
 #      - mail_network
     environment:

@@ -1,4 +1,5 @@
 require 'socket'
+require "postal/config"
 
 EurekaRuby.configure do |config|
   def get_local_ip
@@ -37,7 +38,7 @@ EurekaRuby.configure do |config|
   host_name = ENV.fetch('HOSTNAME', local_ip)
 
   # --- Cấu hình Eureka ---
-  config.eureka_url      = ENV['EUREKA_URL'] || 'http://localhost:8761/eureka/'
+  config.eureka_url      = Postal::Config.eureka.url || 'http://localhost:8760/eureka/'
   config.app_id          = ENV['EUREKA_APP_ID'] || Rails.application.class.module_parent_name.underscore.upcase
   config.host_name       = ENV['EUREKA_HOST_NAME'] || host_name
   config.ip_addr         = ENV['EUREKA_IP_ADDR'] || local_ip
@@ -71,9 +72,9 @@ EurekaRuby.configure do |config|
   puts "Eureka URL: #{config.eureka_url}"
   puts "==================================="
 end
-eureka_enabled  = ENV.fetch('EUREKA_ENABLED', false)
-# Khởi động Eureka client khi Rails server chạy
-if defined?(Rails::Server) && (Rails.env.production? || Rails.env.development? || Rails.env.test?) && eureka_enabled
+puts Postal::Config.eureka.url
+# puts Postal::Config.rails
+if defined?(Rails::Server) && (Rails.env.production? || Rails.env.development? || Rails.env.test?) && Postal::Config.eureka.enabled
   # Đăng ký instance với Eureka
   begin
     EurekaRuby.executor.run(:register)
