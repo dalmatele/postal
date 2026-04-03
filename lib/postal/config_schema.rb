@@ -617,9 +617,14 @@ module Postal
         description "Eureka url"
         default "hello world"
       end
+      string :app_name do
+        description "Service name in Eureka"
+        default "postal-web"
+      end
       boolean :enabled do
         description "Eureka enabled?"
       end
+
     end
   end
 
